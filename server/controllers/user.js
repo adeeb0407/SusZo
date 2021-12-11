@@ -55,10 +55,34 @@ export const createUser = async (req, res) => {
 };
 export const getUser = async (req, res) => {
   try {
-      const fetchData = await UserModel.find() //.limit(how many data you want)
+      const fetchData = await UserModel.find().sort({createdAt : -1}) //.limit(how many data you want)
       // const print = fetchData.map((dataItem) => dataItem._id);
       // const print = fetchData.filter((dataItem) => dataItem.title === 'Adseeb');
       res.status(200).json(fetchData)
+  } catch (error) {
+      res.status(404).json( {message : error.message} )
+  }
+}
+
+export const searchUser = async (req, res) => {
+
+  const {username} = req.body;
+
+  try {
+      const dataWithId = await UserModel.find({username})
+      res.json(dataWithId)
+  } catch (error) {
+      res.status(404).json( {message : error.message} )
+  }
+}
+
+export const userURL = async (req, res) => {
+
+  const {username} = req.params;
+
+  try {
+      const dataWithId = await UserModel.findOne({username})
+      res.json(dataWithId)
   } catch (error) {
       res.status(404).json( {message : error.message} )
   }

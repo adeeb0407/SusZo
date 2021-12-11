@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState, useRef} from 'react'
+import {useState, useRef, useEffect} from 'react'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
+import {Link, useLocation, useNavigate} from 'react-router-dom'
+import { useDispatch } from 'react-redux';
 import Menu from '@mui/material/Menu';
 import suszoLogo from '../images/suszo_logo.png'
 import {
@@ -61,8 +63,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -83,6 +91,15 @@ export default function Navbar() {
             nav.classList.add("nav_remove_button");
         }
   }
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
+
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+    setUser(null);
+  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -114,8 +131,9 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {user !== null ? <Link to ='/profile'><MenuItem onClick={handleMenuClose}> Profile</MenuItem></Link> 
+      : <Link to ='/login'><MenuItem onClick={handleMenuClose}> Login</MenuItem></Link>}
+      {user !== null &&<MenuItem onClick={handleMenuClose} onClick = {logout}>Logout</MenuItem>}
     </Menu>
   );
 
@@ -136,14 +154,16 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+     {user !== null && 
+     <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
           <MailOutlined />
           </Badge>
         </IconButton>
         <p>Messages</p>
-      </MenuItem>
+      </MenuItem>}
+      {user !== null && 
       <MenuItem>
         <IconButton
           size="large"
@@ -155,7 +175,7 @@ export default function Navbar() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
+      </MenuItem>}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -200,18 +220,19 @@ export default function Navbar() {
             <SearchOutlined />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search User"
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            {user !== null &&
+             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
               <MailOutlined />
               </Badge>
-            </IconButton>
-            <IconButton
+            </IconButton>}
+            {user !== null && <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
@@ -219,7 +240,7 @@ export default function Navbar() {
               <Badge badgeContent={17} color="error">
               <BellOutlined />
               </Badge>
-            </IconButton>
+            </IconButton>}
             <IconButton
               size="large"
               edge="end"

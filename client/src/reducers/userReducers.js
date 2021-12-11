@@ -1,11 +1,18 @@
-import {CONSTANT_TEMPLATE} from '../constants/actionTypes'
+import * as actionType from '../constants/actionTypes';
 
-export const reduxTemplate = (mobileIdStorage = null, action) => {
-    switch (action.type) {
-        case CONSTANT_TEMPLATE:
-            return action.payload;
-            
-        default: // need this for default case
-        return mobileIdStorage 
-    }
-}
+const userReducer = (state = { authData: null }, action) => {
+  switch (action.type) {
+    case actionType.AUTH:
+      localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
+
+      return { ...state, authData: action.data, loading: false, errors: null };
+    case actionType.LOGOUT:
+      localStorage.clear();
+
+      return { ...state, authData: null, loading: false, errors: null };
+    default:
+      return state;
+  }
+};
+
+export default userReducer;

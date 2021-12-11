@@ -2,7 +2,8 @@ import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
-import MainRouters from "./routers/auth.js"
+import authRouters from "./routers/auth.js"
+import replyRouters from "./routers/reply.js"
 
 
 const app = express()
@@ -12,7 +13,8 @@ app.use(express.json({limit : "30mb", extended : true}))
 app.use(express.urlencoded({limit: "30mb", extended: true}))
 app.use(cors())
 
-app.use('/user', MainRouters)
+app.use('/user', authRouters)
+app.use('/reply', replyRouters)
 
 app.get('/', (req, res) => {
     res.send('SusZo backend Server')

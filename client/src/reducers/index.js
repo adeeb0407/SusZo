@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import {reduxTemplate} from './userReducers'
+import userReducer from './userReducers'
+import users from './fetchUsers'
 
 export const rootReducer = combineReducers({
-    reduxTemplate, 
+    userReducer, 
+    users,
 }) // reduers in main index.js is coming form here

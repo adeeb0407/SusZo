@@ -11,13 +11,11 @@ import SideNavbar from './components/SideNavbar'
 import Navbar from './components/Navbar'
 import Login from './components/authentication/login/Login'
 import Register from './components/authentication/register/Register'
+import Finduser from './components/users/Finduser';
+import Profile from './components/profile/Profile';
 
 function Main() {
     const dispatch = useDispatch()
-    dispatch(reduxActionTemplate(5))
-    const reduxSelector = useSelector(state => state.reduxTemplate)
-    console.log(reduxSelector)
-
     return (
         <>
         <Navbar />
@@ -28,6 +26,8 @@ function Main() {
             <Route exact path = '/' element = {<Home />} />
             <Route exact path = '/login' element = {<Login />} />
             <Route exact path = '/register' element = {<Register />} />
+            <Route exact path = '/user' element = {<Finduser />} />
+            <Route exact path = '/profile' element = {<Profile />} />
             </Routes>
             </div>
         </div>

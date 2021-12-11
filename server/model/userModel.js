@@ -23,11 +23,18 @@ const userDataModel = mongoose.Schema({
         type : String,
         require : true,
     },
+    headline : {
+        type : String,
+    },
     bio : {
         type : String,
     },
-    following : {
+    followers : {
         type : Number,
+    },
+    createdAt : {
+        type : Date,
+        default : new Date(),
     },
 })
 

@@ -1,17 +1,47 @@
+import { useState, useEffect} from 'react';
 import { Form, Input, Button, Select, Checkbox } from 'antd';
 import { UserOutlined,  Option,LockOutlined, CaretRightOutlined, MailOutlined   } from '@ant-design/icons';
 import '../../../styles/loginFrom.css'
-import {Link} from 'react-router-dom'
+import {register} from '../../../actions/userActions'
+import {Link, useLocation, useNavigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 
 const Register = () => {
-  const { Option } = Select;
+  const history = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+  useEffect(() => {
+    const token = user?.token;
+  
+    if(user !== null){
+        history('/')
+    }
+  }, [location]);
+
+  const { Option } = Select;
+  const [userData, setUserData] = useState({
+    fullname : '',
+    gender : '',
+    email : '',
+    username : '',
+    password: ''
+  })
+
+  const onFinish = (e) => {
+    console.log(userData);
+    dispatch(register(userData, history))
   };
+
+  const handelChange = (e) => {
+    const {value , name} = e.target
+    setUserData({...userData, [name]:value})
+    }
 
   const onGenderChange = (value) => {
     console.log(value)
+    setUserData({...userData, gender : value})
   };
 
   return (
@@ -26,7 +56,6 @@ const Register = () => {
       onFinish={onFinish}
     >
       <Form.Item
-        name="fullName"
         rules={[
           {
             required: true,
@@ -34,10 +63,10 @@ const Register = () => {
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Full Name" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Full Name" name="fullname"
+        onChange ={handelChange}/>
       </Form.Item>
       <Form.Item
-        name="email"
         rules={[
           {
             required: true,
@@ -47,6 +76,7 @@ const Register = () => {
       >
       <Form.Item
         name="gender"
+        onChange = {handelChange}
         rules={[
           {
             required: true,
@@ -64,10 +94,9 @@ const Register = () => {
           <Option value="other">other</Option>
         </Select>
       </Form.Item>
-        <Input prefix={<MailOutlined  className="site-form-item-icon" />} placeholder="Email" />
+        <Input prefix={<MailOutlined  className="site-form-item-icon" />} placeholder="Email"  name="email" onChange = {handelChange}/>
       </Form.Item>
       <Form.Item
-        name="username"
         rules={[
           {
             required: true,
@@ -75,10 +104,9 @@ const Register = () => {
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" name="username" onChange = {handelChange} />
       </Form.Item>
       <Form.Item
-        name="password"
         rules={[
           {
             required: true,
@@ -90,6 +118,8 @@ const Register = () => {
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
+          name="password"
+          onChange = {handelChange}
         />
       </Form.Item>
       <Form.Item>

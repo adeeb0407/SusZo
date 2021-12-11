@@ -1,7 +1,9 @@
 import { Menu,Divider, Switch, Row, Button } from 'antd';
-import React,{useRef, useState} from 'react'
+import React,{useRef, useState,useEffect} from 'react'
+import { useDispatch } from 'react-redux';
 import '../styles/navbar.css'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate, useLocation} from 'react-router-dom'
+import decode from "jwt-decode";
 import {
   UserOutlined,
   HomeOutlined,
@@ -9,16 +11,36 @@ import {
   InboxOutlined,
   SettingOutlined,
   LoginOutlined ,
-  UserAddOutlined ,
+  LogoutOutlined  ,
 } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 
 const Navbar = () => {
 
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
   const [mode, setMode] = React.useState('inline');
   const [theme, setTheme] = React.useState('light');
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
+
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+    setUser(null);
+  };
   const changeMode = value => {
     setMode(value ? 'vertical' : 'inline');
   };
@@ -48,11 +70,18 @@ const Navbar = () => {
           Home
           </Link>
         </Menu.Item>
-        <Menu.Item key="2" icon={<UserOutlined />}>
+        {user !== null &&<Menu.Item key="2" icon={<UserOutlined />}>
+        <Link to ='/profile'>
           Profile
-        </Menu.Item>
+          </Link>
+        </Menu.Item>}
         <Menu.Item key="3" icon={<InboxOutlined />}>
           Inbox
+        </Menu.Item>
+        <Menu.Item key="8" icon={<InboxOutlined />}>
+        <Link to ='/user'>
+          Find User
+          </Link>
         </Menu.Item>
         <Menu.Item key="4" icon={<AppstoreOutlined />}>
           About
@@ -60,16 +89,13 @@ const Navbar = () => {
         <Menu.Item key="5" icon={<SettingOutlined />}>
           Settings
         </Menu.Item>
-        <Menu.Item  icon={<LoginOutlined />}>
+        {user === null ?<Menu.Item  icon={<LoginOutlined />}>
         <Link to = '/login'>
             Login
         </Link>
-        </Menu.Item>
-        <Menu.Item  icon={<UserAddOutlined />}>
-        <Link to = '/register'>
-            Register
-        </Link>
-        </Menu.Item>
+        </Menu.Item> : <Menu.Item  icon={<LogoutOutlined />} onClick = {logout}>
+            Logout
+        </Menu.Item>}
       </Menu>
     </div>
     </>
