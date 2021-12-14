@@ -12,6 +12,7 @@ import {
   SettingOutlined,
   LoginOutlined ,
   LogoutOutlined  ,
+  UsergroupAddOutlined,
 } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
@@ -75,10 +76,10 @@ const Navbar = () => {
           Profile
           </Link>
         </Menu.Item>}
-        <Menu.Item key="3" icon={<InboxOutlined />}>
+        {user !== null  &&<Menu.Item key="3" icon={<InboxOutlined />}>
           Inbox
-        </Menu.Item>
-        <Menu.Item key="8" icon={<InboxOutlined />}>
+        </Menu.Item>}
+        <Menu.Item key="8" icon={<UsergroupAddOutlined />}>
         <Link to ='/user'>
           Find User
           </Link>

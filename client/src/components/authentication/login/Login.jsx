@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined, LoginOutlined } from '@ant-design/icons';
 import '../../../styles/loginFrom.css'
 import {Link, useLocation, useNavigate} from 'react-router-dom'
@@ -37,6 +37,7 @@ const Login = () => {
   const onFinish = (values) => {
     console.log(loginDetails);
     dispatch(login(loginDetails, history));
+    message.success('User Loged in Successfully')
       setloginSuccess(true)
   };
 
@@ -72,7 +73,7 @@ const Login = () => {
           },
         ]}
       >
-        <Input
+        <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"

@@ -13,6 +13,8 @@ import Login from './components/authentication/login/Login'
 import Register from './components/authentication/register/Register'
 import Finduser from './components/users/Finduser';
 import Profile from './components/profile/Profile';
+import Editprofile from './components/editUserProfile/Editprofile';
+import VisitProfile from './components/profile/VisitProfile';
 
 function Main() {
     const dispatch = useDispatch()
@@ -28,6 +30,8 @@ function Main() {
             <Route exact path = '/register' element = {<Register />} />
             <Route exact path = '/user' element = {<Finduser />} />
             <Route exact path = '/profile' element = {<Profile />} />
+            <Route exact path = '/edituserprofile' element = {<Editprofile />} />
+            <Route exact path = '/visitprofile' element = {<VisitProfile />} />
             </Routes>
             </div>
         </div>

@@ -1,0 +1,68 @@
+
+.editprofile{
+    width: 500px;
+}
+.bio_edit_profile{
+    height: 200px;
+}
+.edit_avatars{
+    padding: 5px;
+    margin: 5px;
+    /* border: 5px solid #096dd9; */
+}
+.avatar_radio{
+    visibility: visible;
+}
+.avatar_image {
+    opacity: 0.8;
+    width: 200px;
+    height: 160px;
+    background-position: center center;
+    background-size: cover;
+    background-color: gray;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 50%;
+    height: 130px;
+    width: 130px;
+  }
+  .avatar_image:hover {
+    opacity: 1;
+  }
+  .avatars{
+      display: flex;
+      flex-wrap: wrap;
+  }
+  
+  .radio-img > input {
+    display: none;
+  }
+  .radio-img > .avatar_image {
+    cursor: pointer;
+  }
+  .radio-img > input:checked + .avatar_image {
+    border: 5px solid #096dd9;
+  }
+  .edit_profile_main{
+    margin-left: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    min-width: 70vw;
+    margin-top: 20px;
+  }
+@media (max-width: 600px) {
+    .editprofile{
+        width: 250px;
+    }
+    .avatar_image{
+        padding: 0px;
+        height: 100px;
+        width: 100px;
+        margin: 5px;
+    }
+    .edit_profile_main{
+      margin-left: 20%;
+    }
+}

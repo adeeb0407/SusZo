@@ -26,11 +26,20 @@ const userDataModel = mongoose.Schema({
     headline : {
         type : String,
     },
+    intrests : {
+        type : [],
+    },
+    replies : {
+        type : [],
+    },
     bio : {
         type : String,
     },
+    avatar : {
+        type : String,
+    },
     followers : {
-        type : Number,
+        type : [],
     },
     createdAt : {
         type : Date,

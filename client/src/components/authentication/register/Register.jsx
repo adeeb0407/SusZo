@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { Form, Input, Button, Select, Checkbox } from 'antd';
+import { Form, Input, Button, Select, Checkbox, message } from 'antd';
 import { UserOutlined,  Option,LockOutlined, CaretRightOutlined, MailOutlined   } from '@ant-design/icons';
 import '../../../styles/loginFrom.css'
 import {register} from '../../../actions/userActions'
@@ -16,7 +16,7 @@ const Register = () => {
     const token = user?.token;
   
     if(user !== null){
-        history('/')
+        history('/profile')
     }
   }, [location]);
 
@@ -26,12 +26,13 @@ const Register = () => {
     gender : '',
     email : '',
     username : '',
-    password: ''
+    password: '',
+    confirmpassword: ''
   })
 
   const onFinish = (e) => {
-    console.log(userData);
     dispatch(register(userData, history))
+    message.success('User Registered Successfully')
   };
 
   const handelChange = (e) => {
@@ -41,7 +42,11 @@ const Register = () => {
 
   const onGenderChange = (value) => {
     console.log(value)
+    if(userData.password !== userData.confirmpassword){
+      console.log('please enter proper password')
+    }else{
     setUserData({...userData, gender : value})
+    }
   };
 
   return (
@@ -114,11 +119,27 @@ const Register = () => {
           },
         ]}
       >
-        <Input
+        <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
           name="password"
+          onChange = {handelChange}
+        />
+      </Form.Item>
+      <Form.Item
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Password!',
+          },
+        ]}
+      >
+        <Input.Password
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Confirm Password"
+          name="confirmpassword"
           onChange = {handelChange}
         />
       </Form.Item>

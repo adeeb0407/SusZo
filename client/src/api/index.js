@@ -14,3 +14,7 @@ export const signIn = (formData) => API.post('/user/login', formData);
 export const signUp = (formData) => API.post('/user/register', formData);
 //
 export const getUsers = () => API.get('/user/login/details');
+export const searchUser = (username) => API.post('/user/search', {username : username});
+//update Post
+export const getUsersById = (id) => API.get(`/user/login/details/${id}`);
+export const updateProfile = (id, updatedProfile) => API.patch(`/user/login/details/${id}`, updatedProfile);

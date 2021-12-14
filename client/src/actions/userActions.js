@@ -6,7 +6,7 @@ export const login = (formData, router) => async (dispatch) => {
     const { data } = await api.signIn(formData);
     console.log('hello')
     dispatch({ type: AUTH, data });
-    router('/');
+    router('/profile');
   } catch (error) {
     console.log(error);
   }
@@ -17,7 +17,7 @@ export const register = (formData, router) => async (dispatch) => {
 
     const { data } = await api.signUp(formData);
     dispatch({ type: AUTH, data });
-    router('/');
+    router('/edituserprofile');
   } catch (error) {
     console.log(error);
   }
