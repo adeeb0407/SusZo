@@ -32,6 +32,13 @@ const userDataModel = mongoose.Schema({
     replies : {
         type : [],
     },
+    blogs : {
+        type : [],
+    },
+    reply : [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'reply'
+    }],
     bio : {
         type : String,
     },

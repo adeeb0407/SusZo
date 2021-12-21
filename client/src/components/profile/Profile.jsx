@@ -15,8 +15,10 @@ import { BsGenderMale, BsGenderFemale } from 'react-icons/bs';
 import { FaTransgenderAlt, FaUserAlt } from 'react-icons/fa';
 import {fetchUsersById} from '../../actions/getUsers'
 import { useDispatch, useSelector } from 'react-redux';
-import { Tag, Divider, Avatar } from 'antd';
+import { Tag, Divider, Avatar, } from 'antd';
 import {Link} from 'react-router-dom'
+import Replies from './Replies'
+import {deleteReply} from '../../actions/replies'
 import {MailFilled,
         EditFilled,
         EyeOutlined,
@@ -32,10 +34,16 @@ function Profile() {
   const dispatch = useDispatch()
   const profileData = useSelector((state) => state.userById)
 
+  const deletedData = profileData.replies
+
   useEffect(() => {
     dispatch(fetchUsersById(user.response.id),setApiReady(true));
-  }, [dispatch]);
-console.log(profileData.intrests)
+    const deletedData = profileData.replies
+  }, []);
+
+  console.log(profileData)
+
+
 
     if(!apiReady){
         return(
@@ -100,7 +108,7 @@ console.log(profileData.intrests)
     <div className="left-side">
       <div className="profile-side">
         <p className="mobile-no"><FaUserAlt />   {profileData.fullname}</p>
-        <p className="user-mail"><MailFilled />   {profileData.email}</p>
+        {/* <p className="user-mail"><MailFilled />   {profileData.email}</p> */}
         <div className="user-bio">
           <h3>Headline : </h3>
           <p className="bio">
@@ -124,27 +132,9 @@ console.log(profileData.intrests)
           <button className="chatbtn" id="chatBtn"><ShareAltOutlined /> Share</button>
           <Link to ='/edituserprofile' ><button className="createbtn" id="Create-post"><EditFilled /> Edit</button></Link>
         </div>
-        <div className="user-rating">
-          <h3 className="rating">4.5</h3>
-          <div className="rate">
-            <div className="star-outer">
-              <div className="star-inner">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-              </div>
-            </div>
-            <span className="no-of-user-rate"><span>123</span>&nbsp;&nbsp;reviews</span>
-          </div>
-
-        </div>
       </div>
-
     </div>
     <div className="right-side">
-
       <div className="nav">
         <ul>
           <li  className="user-post active">Posts</li>
@@ -154,6 +144,7 @@ console.log(profileData.intrests)
         </ul>
       </div>
       <div className="profile-body">
+    <Replies replies = {profileData?.replies} userId = {user.response.id} verifyId = {profileData?._id}/>
         <div className="profile-posts tab">
           <h1>Replies</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quia sunt itaque ut libero cupiditate ullam qui velit laborum placeat doloribus, non tempore nisi ratione error rem minima ducimus. Accusamus adipisci quasi at itaque repellat sed

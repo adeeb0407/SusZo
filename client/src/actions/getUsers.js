@@ -12,15 +12,13 @@ export const fetchUsers = () => async(dispatch) => {
       console.log(error.message)
   }
 }
-export const searchUser = (username, router) => async(dispatch) => {
+export const searchUser = (username) => async(dispatch) => {
   try {
       const {data} = await api.searchUser(username)
       dispatch({
           type : FETCH_USER_SERCHED,
           payload : data
       }) // dispatch is coming form redux-thunk also the aysn (dispatch)
-      console.log(data)
-      router('/edituserprofile')
   } catch (error) {
       console.log(error.message)
   }

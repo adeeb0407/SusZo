@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans:wght@700&display=swap');
 .nav_remove_button{
     transition: all 3.5s ease;
     left: -100%;
@@ -35,6 +35,9 @@
 }
 .avatar-item{
     padding: 10px;
+}
+.logoTitle{
+    font-family: 'Bebas Neue', cursive;
 }
 @media (max-width: 768px) {
 

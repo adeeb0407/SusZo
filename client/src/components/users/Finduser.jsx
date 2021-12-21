@@ -14,6 +14,7 @@ function Finduser() {
     }
 
     const users = useSelector(state => state.users)
+    console.log(users)
     return (
         <div>
             <Profilecard users = {users} getUserId = {getUserId}/>

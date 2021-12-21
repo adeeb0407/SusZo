@@ -1,0 +1,37 @@
+.replies{
+    margin: 30px;
+    box-sizing: border-box;
+    height: 20%;
+}
+.box-replies{
+    overflow: scroll;
+    height: 50vh;
+}
+.deleteIcon:hover{
+    background-color: #E21010;
+    color: white !important;
+}
+.deleteIcon{
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #1890ff; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0050b3; 
+  }

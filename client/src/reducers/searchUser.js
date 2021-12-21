@@ -18,13 +18,3 @@ export const id = (id = null, action) => {
         return id 
     }
 }
-export const searchedUserData = (usersData = '', action) => {
-    switch (action.type) {
-        
-        case FETCH_USER_SERCHED:
-            return action.payload;
-
-        default: // need this for default case
-        return usersData 
-    }
-}

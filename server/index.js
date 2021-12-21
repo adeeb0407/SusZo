@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 import dotenv from "dotenv"
 import authRouters from "./routers/auth.js"
 import replyRouters from "./routers/reply.js"
+import blogRouters from "./routers/blog.js"
 
 
 const app = express()
@@ -15,6 +16,7 @@ app.use(cors())
 
 app.use('/user', authRouters)
 app.use('/reply', replyRouters)
+app.use('/blog', blogRouters)
 
 app.get('/', (req, res) => {
     res.send('SusZo backend Server')

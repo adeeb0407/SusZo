@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import UserModel from '../model/userModel.js'
+import ReplyModel from '../model/replyModel.js'
+import BlogModel from '../model/BlogModel.js'
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -39,7 +41,7 @@ export const createUser = async (req, res) => {
 
     const encodedPassword = await bcrypt.hash(password, 12);
 
-    const result = await UserModel.create({ email, password: encodedPassword, fullname, gender, username, avatar : '',bio : '', headline: '', intrests : [], followers: [], replies : []});
+    const result = await UserModel.create({ email, password: encodedPassword, fullname, gender, username, avatar : '',bio : '', headline: '', intrests : [], followers: [], replies: []});
 
     const response = {email, fullname, username, password, gender, id: result._id}
     
@@ -55,7 +57,18 @@ export const createUser = async (req, res) => {
 };
 export const getUser = async (req, res) => {
   try {
-      const fetchData = await UserModel.find().sort({createdAt : -1}) //.limit(how many data you want)
+      const fetchData = await UserModel.find().sort({createdAt : -1})
+      // .aggregate([
+      //   { $lookup:
+      //      {
+      //        from: 'reply',
+      //        localField: 'reply',
+      //        foreignField: '_id',
+      //        as: 'userReply'
+      //      }
+      //    }
+      //   ])
+       //.limit(how many data you want)
       // const print = fetchData.map((dataItem) => dataItem._id);
       // const print = fetchData.filter((dataItem) => dataItem.title === 'Adseeb');
       res.status(200).json(fetchData)
@@ -70,19 +83,25 @@ export const searchUser = async (req, res) => {
   console.log(req.body)
 
   try {
-      const searchedUserData = await UserModel.find({username})
+      const searchedUserData = await UserModel.findOne({username})
+      const userId = searchedUserData._id
+      const userReplies = await ReplyModel.find({userId : userId}).sort({createdAt : -1})
+      //.select('fullname')
+      searchedUserData.replies.push(userReplies)
+      // .select('fullname')
       res.json(searchedUserData)
   } catch (error) {
       res.status(404).json( {message : error.message} )
   }
 }
 export const fetchUserById = async (req, res) => {
-
-  
-  const id = req.params
   try {
-      const dataWithId = await UserModel.findById(req.params.mainId)
-      res.json(dataWithId)
+    const userData = await UserModel.findById(req.params.mainId)
+     const userReplies = await ReplyModel.find({userId : req.params.mainId}).sort({createdAt : -1})
+     console.log(userReplies)
+     //.select('fullname')
+    userData.replies.push(userReplies)
+    res.json(userData)
   } catch (error) {
       res.status(404).json( {message : error.message} )
   }
@@ -112,4 +131,16 @@ export const updateUserProfile = async (req, res) => {
     await UserModel.findByIdAndUpdate(id, updatedPost, { new: true });
     console.log('updated')
     res.json(updatedPost);
+}
+
+export const fetchUserBlogs = async (req, res) => {
+  try {
+    const userData = await UserModel.findById(req.params.mainId)
+     const userBlogs = await BlogModel.find({userId : req.params.mainId}).sort({createdAt : -1})
+     //.select('fullname')
+    userData.blogs.push(userBlogs)
+    res.json(userData)
+  } catch (error) {
+      res.status(404).json( {message : error.message} )
+  }
 }

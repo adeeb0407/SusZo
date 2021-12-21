@@ -13,6 +13,7 @@ import {
   LoginOutlined ,
   LogoutOutlined  ,
   UsergroupAddOutlined,
+  CompassOutlined,
 } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
@@ -78,6 +79,9 @@ const Navbar = () => {
         </Menu.Item>}
         {user !== null  &&<Menu.Item key="3" icon={<InboxOutlined />}>
           Inbox
+        </Menu.Item>}
+        {user !== null  &&<Menu.Item key="10" icon={<CompassOutlined />}>
+          Whats's New
         </Menu.Item>}
         <Menu.Item key="8" icon={<UsergroupAddOutlined />}>
         <Link to ='/user'>

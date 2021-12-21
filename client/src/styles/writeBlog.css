@@ -1,0 +1,9 @@
+.blogWriter{
+    width: 87vw;
+}
+
+@media (max-width: 600px) {
+    .blogWriter{
+        width: 100vw;
+    } 
+}

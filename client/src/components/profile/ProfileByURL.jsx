@@ -14,12 +14,12 @@ import default_female from '../../images/default_female.jpg'
 import other from '../../images/other.png'
 import { BsGenderMale, BsGenderFemale } from 'react-icons/bs';
 import { FaTransgenderAlt, FaUserAlt } from 'react-icons/fa';
-import {fetchUsersById, captureId} from '../../actions/getUsers'
+import {fetchUsersById, captureId, searchUser} from '../../actions/getUsers'
 import { useDispatch, useSelector } from 'react-redux';
 import Replies from './Replies'
 import WriteReply from './WriteReply'
 import { Tag, Divider, Avatar } from 'antd';
-import {Link, useParams} from 'react-router-dom'
+import {Link, useParams, useNavigate} from 'react-router-dom'
 import {MailFilled,
         EditFilled,
         EyeOutlined,
@@ -29,22 +29,23 @@ import {MailFilled,
 } from '@ant-design/icons';
 
 
-function VisitProfile() {
+function ProfileByURL() {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     let { username } = useParams();
     console.log(username)
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-    const profileData = useSelector((state) => state.userById)
+    const profileData = useSelector((state) => state.userUrl)
     const id = useSelector((state) => state.id)
     console.log(id)
 
     useEffect(() => {
-        dispatch(fetchUsersById(id));
+        dispatch(searchUser(username));
       }, [dispatch]);
 
-      console.log(profileData.reply)
-if(profileData === ''){
+      console.log(profileData)
+if(!profileData){
   return(<Empty />)
 }else{
     return (
@@ -81,7 +82,7 @@ switch (profileData?.avatar) {
      )
  default:
      return (
-      <img src ={profileData?.gender === 'male' ? default_male : profileData?.gender === 'female' ? default_female : default_male}  width="200px" />
+      <img src ={profileData.gender === 'male' ? default_male : profileData.gender === 'female' ? default_female : default_male}  width="200px" />
      )
 }
 
@@ -90,9 +91,9 @@ switch (profileData?.avatar) {
 <div className="profile-nav-info">
   <h3 className="user-name">{profileData.username}</h3>
   <div className="address">
-  {profileData.gender === 'male' &&
+  {profileData?.gender === 'male' &&
     <p id="state" className="state">Male <BsGenderMale style = {{color : '#1890ff'}}/></p>}
-  {profileData.gender === 'female' &&
+  {profileData?.gender === 'female' &&
     <p id="state" className="state">Female <BsGenderFemale style = {{color : '#D612CE'}}/></p>}
   {profileData.gender === 'other' &&
     <p id="state" className="state">Other <FaTransgenderAlt /></p>}
@@ -125,20 +126,19 @@ switch (profileData?.avatar) {
     )}
     </div>
   </div>
-
 </div>
 <div className="right-side">
   <div className="nav">
     <ul>
-      <li  className="user-post active">Replies</li>
-      <li  className="user-review">Blogs</li>
+      <li  className="user-post active">Posts</li>
+      <li  className="user-review">Replies</li>
+      <li  className="user-setting"> Inbox</li>
+      <li  className="user-setting"> Settings</li>
     </ul>
   </div>
   <div className="profile-body">
-
-  <Replies replies = {profileData?.replies} userId = {id} verfied = ''/>
-  {user?.response.id !== id &&<WriteReply id = {id}/>}
-
+<Replies replies = {profileData?.replies} verifyId = {profileData?._id}/>
+{user?.response.id !== profileData?._id &&<WriteReply id = {profileData?._id}/>}
     <div className="profile-posts tab">
       <h1>Replies</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quia sunt itaque ut libero cupiditate ullam qui velit laborum placeat doloribus, non tempore nisi ratione error rem minima ducimus. Accusamus adipisci quasi at itaque repellat sed
@@ -168,4 +168,4 @@ switch (profileData?.avatar) {
   }
 }
 
-export default VisitProfile
+export default ProfileByURL

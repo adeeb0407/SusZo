@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 import ReplyModel from '../model/replyModel.js'
-import UserModel from '../model/userModel.js'
+import BlogModel from '../model/BlogModel.js'
 
-export const fetchReplies = async (req, res) => {
+export const fetchBlogs = async (req, res) => {
     try {
-        const fetchData = await ReplyModel.find() //.limit(how many data you want)
+        const fetchData = await BlogModel.find().sort({createdAt : -1}) //.limit(how many data you want)
         // const print = fetchData.map((dataItem) => dataItem._id);
         // const print = fetchData.filter((dataItem) => dataItem.title === 'Adseeb');
         res.status(200).json(fetchData)
@@ -13,11 +13,12 @@ export const fetchReplies = async (req, res) => {
     }
 }
 
-export const addReplyData = async (req, res) => {
+export const addBlog = async (req, res) => {
 
     console.log(req.body)
-    const newData = new ReplyModel({
-    reply : req.body.reply,
+    const newData = new BlogModel({
+    title : req.body.title,
+    blogBody : req.body.blogBody,
     userId :  req.body.userId,
     });
     try {
@@ -34,19 +35,19 @@ export const addReplyData = async (req, res) => {
     }
 }
 
-export const fetchReplyWithId = async (req, res) => {
+export const fetchBlogWithId = async (req, res) => {
     try {
-        const dataWithId = await ReplyModel.findById(req.params.mainId)
+        const dataWithId = await BlogModel.findById(req.params.mainId)
         res.json(dataWithId)
     } catch (error) {
         res.status(404).json( {message : error.message} )
     }
 }
 
-export const deleteReplyData = async (req, res) => {
+export const deleteBlogData = async (req, res) => {
     
     try {
-        const deleteData =  await ReplyModel.deleteOne({_id: req.params.mainId})
+        const deleteData =  await BlogModel.deleteOne({_id: req.params.mainId})
         console.log(`deleted Data`)
         res.json(deleteData)
     } catch (error) {
@@ -54,13 +55,13 @@ export const deleteReplyData = async (req, res) => {
     }
 }
 
-export const updateReplyData = async(req, res) => {
+export const updateBlogData = async(req, res) => {
     try{
         const id = req.params.mainId
         const {title, description, updatedAt} = req.body;
         const updatedData = {title, description, updatedAt, _id : id}
         
-        await ReplyModel.findByIdAndUpdate(id, updatedData, {new : true})
+        await BlogModel.findByIdAndUpdate(id, updatedData, {new : true})
         res.json(updatedData)
 
     }catch(error){

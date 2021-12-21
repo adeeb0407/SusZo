@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
 
-const replyModel = mongoose.Schema({
-    reply : {
+const blogModel = mongoose.Schema({
+    title : {
+        type : String,
+        required : true,
+    },
+    blogBody : {
         type : String,
         required : true,
     },
@@ -15,6 +19,6 @@ const replyModel = mongoose.Schema({
     },
 })
 
-const ReplyModel = mongoose.model('reply', replyModel)
+const BlogModel = mongoose.model('Blog', blogModel)
 
-export default ReplyModel;
+export default BlogModel;

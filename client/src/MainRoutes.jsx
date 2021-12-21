@@ -15,6 +15,8 @@ import Finduser from './components/users/Finduser';
 import Profile from './components/profile/Profile';
 import Editprofile from './components/editUserProfile/Editprofile';
 import VisitProfile from './components/profile/VisitProfile';
+import ProfileByURL from './components/profile/ProfileByURL';
+import WriteBlog from './components/blog/WriteBlog';
 
 function Main() {
     const dispatch = useDispatch()
@@ -32,6 +34,8 @@ function Main() {
             <Route exact path = '/profile' element = {<Profile />} />
             <Route exact path = '/edituserprofile' element = {<Editprofile />} />
             <Route exact path = '/visitprofile' element = {<VisitProfile />} />
+            <Route exact path = '/user/:username' element = {<ProfileByURL />} />
+            <Route exact path = '/writeBlog' element = {<WriteBlog />} />
             </Routes>
             </div>
         </div>

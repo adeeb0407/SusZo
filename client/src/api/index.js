@@ -18,3 +18,6 @@ export const searchUser = (username) => API.post('/user/search', {username : use
 //update Post
 export const getUsersById = (id) => API.get(`/user/login/details/${id}`);
 export const updateProfile = (id, updatedProfile) => API.patch(`/user/login/details/${id}`, updatedProfile);
+//Replies
+export const postReply = (formData, id) => API.post(`/reply`, formData);
+export const deleteReply = (id) => API.delete(`/reply/${id}`, id);

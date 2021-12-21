@@ -37,6 +37,7 @@ import {
   BellOutlined,
   MoreOutlined,
   FileSearchOutlined,
+  CompassOutlined,
 } from "@ant-design/icons";
 
 const Search = styled("div")(({ theme }) => ({
@@ -270,7 +271,7 @@ export default function Navbar() {
               width="50px"
               style={{ padding: "5px" }}
             />
-            SusZo
+            <span className="logoTitle">SusZo</span>
           </Typography>
           <Search>
             <SearchIconWrapper>
