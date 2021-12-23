@@ -16,8 +16,8 @@ import { BsGenderMale, BsGenderFemale } from 'react-icons/bs';
 import { FaTransgenderAlt, FaUserAlt } from 'react-icons/fa';
 import {fetchUsersById, captureId, searchUser} from '../../actions/getUsers'
 import { useDispatch, useSelector } from 'react-redux';
-import Replies from './Replies'
-import WriteReply from './WriteReply'
+import Replies from '../reply/Replies'
+import WriteReply from '../reply/WriteReply'
 import { Tag, Divider, Avatar } from 'antd';
 import {Link, useParams, useNavigate} from 'react-router-dom'
 import {MailFilled,
@@ -130,10 +130,8 @@ switch (profileData?.avatar) {
 <div className="right-side">
   <div className="nav">
     <ul>
-      <li  className="user-post active">Posts</li>
-      <li  className="user-review">Replies</li>
-      <li  className="user-setting"> Inbox</li>
-      <li  className="user-setting"> Settings</li>
+      <li  className="user-post active">Replies</li>
+      <li  className="user-review">Blogs</li>
     </ul>
   </div>
   <div className="profile-body">

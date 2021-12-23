@@ -15,13 +15,14 @@ import { BsGenderMale, BsGenderFemale } from 'react-icons/bs';
 import { FaTransgenderAlt, FaUserAlt } from 'react-icons/fa';
 import {fetchUsersById} from '../../actions/getUsers'
 import { useDispatch, useSelector } from 'react-redux';
-import { Tag, Divider, Avatar, } from 'antd';
-import {Link} from 'react-router-dom'
-import Replies from './Replies'
+import { Tag, Divider, Avatar, message } from 'antd';
+import {Link, Routes, Route, Outlet } from 'react-router-dom'
+import MyBlogs from '../blog/MyBlogs'
+import Replies from '../reply/Replies'
 import {deleteReply} from '../../actions/replies'
 import {MailFilled,
         EditFilled,
-        EyeOutlined,
+        BookOutlined,
         ShareAltOutlined,
         UserOutlined,
 
@@ -34,12 +35,15 @@ function Profile() {
   const dispatch = useDispatch()
   const profileData = useSelector((state) => state.userById)
 
-  const deletedData = profileData.replies
-
   useEffect(() => {
     dispatch(fetchUsersById(user.response.id),setApiReady(true));
     const deletedData = profileData.replies
   }, []);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(`http://localhost:3000/user/${profileData?.username}`);
+    message.success('User URL copied to Clipboard');
+  }
 
   console.log(profileData)
 
@@ -128,8 +132,8 @@ function Profile() {
         )}
         </div>
         <div className="profile-btn">
-          <button className="chatbtn" id="chatBtn"><EyeOutlined /> View</button>
-          <button className="chatbtn" id="chatBtn"><ShareAltOutlined /> Share</button>
+         <button className="chatbtn" id="chatBtn"><Link to='/writeBlog'><BookOutlined /> Write a Diary</Link></button> 
+          <button className="chatbtn" id="chatBtn" onClick = {copyToClipboard}><ShareAltOutlined /> Share</button>
           <Link to ='/edituserprofile' ><button className="createbtn" id="Create-post"><EditFilled /> Edit</button></Link>
         </div>
       </div>
@@ -137,35 +141,26 @@ function Profile() {
     <div className="right-side">
       <div className="nav">
         <ul>
-          <li  className="user-post active">Posts</li>
-          <li  className="user-review">Replies</li>
-          <li  className="user-setting"> Inbox</li>
+        <Link to = '/profile'>
+          <li  className="user-post active">Replies</li>
+          </Link>
+          <Link to = '/profile'>
+          <li  className="user-review">Inbox</li>
+          </Link>
+          <Link to = '/profile/mydiary'>
+          <li  className="user-setting">Diary</li>
+          </Link>
+          <Link to = '/profile/mydiary'>
           <li  className="user-setting"> Settings</li>
+          </Link>
         </ul>
       </div>
       <div className="profile-body">
-    <Replies replies = {profileData?.replies} userId = {user.response.id} verifyId = {profileData?._id}/>
-        <div className="profile-posts tab">
-          <h1>Replies</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quia sunt itaque ut libero cupiditate ullam qui velit laborum placeat doloribus, non tempore nisi ratione error rem minima ducimus. Accusamus adipisci quasi at itaque repellat sed
-            magni eius magnam repellendus. Quidem inventore repudiandae sunt odit. Aliquid facilis fugiat earum ex officia eveniet, nisi, similique ad ullam repudiandae molestias aspernatur qui autem, nam? Cupiditate ut quasi iste, eos perspiciatis maiores
-            molestiae.</p>
-        </div>
-        <div className="profile-reviews tab">
-          <h1>Inbox</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam pariatur officia, aperiam quidem quasi, tenetur molestiae. Architecto mollitia laborum possimus iste esse. Perferendis tempora consectetur, quae qui nihil voluptas. Maiores debitis
-            repellendus excepturi quisquam temporibus quam nobis voluptatem, reiciendis distinctio deserunt vitae! Maxime provident, distinctio animi commodi nemo, eveniet fugit porro quos nesciunt quidem a, corporis nisi dolorum minus sit eaque error
-            sequi ullam. Quidem ut fugiat, praesentium velit aliquam!</p>
-        </div>
-        <div className="profile-settings tab">
-          <div className="account-setting">
-            <h1>Acount Setting</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit omnis eaque, expedita nostrum, facere libero provident laudantium. Quis, hic doloribus! Laboriosam nemo tempora praesentium. Culpa quo velit omnis, debitis maxime, sequi
-              animi dolores commodi odio placeat, magnam, cupiditate facilis impedit veniam? Soluta aliquam excepturi illum natus adipisci ipsum quo, voluptatem, nemo, commodi, molestiae doloribus magni et. Cum, saepe enim quam voluptatum vel debitis
-              nihil, recusandae, omnis officiis tenetur, ullam rerum.</p>
-          </div>
-        </div>
-      </div>
+      <Routes>
+      <Route exact path = '/' element = {<Replies  replies = {profileData?.replies} userId = {user.response.id} verifyId = {profileData?._id}/>} />
+      </Routes>
+      <Outlet />
+    </div>
     </div>
   </div>
 </div>

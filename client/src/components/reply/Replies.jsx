@@ -24,6 +24,7 @@ const Replies = ({ replies, userId, verifyId }) => {
   function cancel(e) {
     console.log(e);
     setdeleteReplyer(false)
+    
     message.error("Reply deletion rejected");
   }
 
@@ -88,6 +89,7 @@ const Replies = ({ replies, userId, verifyId }) => {
                           onConfirm={function confirm() {
                             setdeleteReplyer((prevData) => !prevData);
                             dispatch(deleteReply(repliesData._id));
+                            dispatch(fetchUsersById(userId));
                             message.success("Reply was deleted Sucessfully");
                           }}
                           onCancel={cancel}

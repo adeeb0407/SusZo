@@ -98,7 +98,6 @@ export const fetchUserById = async (req, res) => {
   try {
     const userData = await UserModel.findById(req.params.mainId)
      const userReplies = await ReplyModel.find({userId : req.params.mainId}).sort({createdAt : -1})
-     console.log(userReplies)
      //.select('fullname')
     userData.replies.push(userReplies)
     res.json(userData)

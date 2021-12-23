@@ -81,7 +81,9 @@ const Navbar = () => {
           Inbox
         </Menu.Item>}
         {user !== null  &&<Menu.Item key="10" icon={<CompassOutlined />}>
+        <Link to ='/whatsnew'>
           Whats's New
+          </Link>
         </Menu.Item>}
         <Menu.Item key="8" icon={<UsergroupAddOutlined />}>
         <Link to ='/user'>

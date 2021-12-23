@@ -1,12 +1,14 @@
 import mongoose from 'mongoose';
-import ReplyModel from '../model/replyModel.js'
+import UserModel from '../model/userModel.js'
 import BlogModel from '../model/BlogModel.js'
 
 export const fetchBlogs = async (req, res) => {
     try {
-        const fetchData = await BlogModel.find().sort({createdAt : -1}) //.limit(how many data you want)
-        // const print = fetchData.map((dataItem) => dataItem._id);
+        const fetchData = await BlogModel.find().populate('userDetails', `username avatar`).sort({createdAt : -1}) //.limit(how many data you want)
+        //  const print = fetchData.map((dataItem) => dataItem.userId);
+        // const userData = await UserModel.findById(fetchData.find((dataItem) => dataItem.userId)).select('username', 'avatar')
         // const print = fetchData.filter((dataItem) => dataItem.title === 'Adseeb');
+         //const finalData = fetchData.push(userData)
         res.status(200).json(fetchData)
     } catch (error) {
         res.status(404).json( {message : error.message} )
@@ -18,18 +20,19 @@ export const addBlog = async (req, res) => {
     console.log(req.body)
     const newData = new BlogModel({
     title : req.body.title,
+    snippet : req.body.snippet,
     blogBody : req.body.blogBody,
     userId :  req.body.userId,
     });
     try {
     const createdData =  await newData.save();
-    // const userRefId =await UserModel.updateOne(
-    //     { _id: req.body.userId }, 
-    //     { $push: { reply: createdData._id } }
-    // );
-    // console.log(userRefId)
-    // const userData = await UserModel.findById(req.body.userId)
-    res.json(createdData)
+    const userRefId = await BlogModel.updateOne(
+        { _id: createdData._id }, 
+        { $push: { userDetails: req.body.userId } }
+        );
+     console.log(userRefId)
+     //const userData = await BlogModel.findById(req.body.userId)
+    res.json(userRefId)
 } catch (error) {
     res.status(404).json( {message : error.message} )
     }
@@ -38,6 +41,15 @@ export const addBlog = async (req, res) => {
 export const fetchBlogWithId = async (req, res) => {
     try {
         const dataWithId = await BlogModel.findById(req.params.mainId)
+        res.json(dataWithId)
+    } catch (error) {
+        res.status(404).json( {message : error.message} )
+    }
+}
+
+export const fetchBlogByUser = async (req, res) => {
+    try {
+        const dataWithId = await BlogModel.find({userId : req.params.mainId})
         res.json(dataWithId)
     } catch (error) {
         res.status(404).json( {message : error.message} )

@@ -29,11 +29,12 @@ function WriteReply({id}) {
         setReplyData({...replyData, reply: ''})
     }
     return (
-        <div className = 'replies'>
+        <div className = 'replies mainadjust'>
           <Comment
             avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
             content={
               <Editor
+              
                 onChange={handleCommentChange}
                 onSubmit={handleCommentSubmit}
                 name = 'comment'

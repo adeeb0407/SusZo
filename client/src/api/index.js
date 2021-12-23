@@ -21,3 +21,8 @@ export const updateProfile = (id, updatedProfile) => API.patch(`/user/login/deta
 //Replies
 export const postReply = (formData, id) => API.post(`/reply`, formData);
 export const deleteReply = (id) => API.delete(`/reply/${id}`, id);
+//Blogs
+export const postBlog = (formData, id) => API.post(`/blog`, formData);
+export const fetchBlogsByUser = (id) => API.get(`/blog/user/${id}`);
+export const fetchAllBlogs = () => API.get(`/blog`);
+

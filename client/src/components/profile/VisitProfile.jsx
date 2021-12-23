@@ -16,8 +16,8 @@ import { BsGenderMale, BsGenderFemale } from 'react-icons/bs';
 import { FaTransgenderAlt, FaUserAlt } from 'react-icons/fa';
 import {fetchUsersById, captureId} from '../../actions/getUsers'
 import { useDispatch, useSelector } from 'react-redux';
-import Replies from './Replies'
-import WriteReply from './WriteReply'
+import Replies from '../reply/Replies'
+import WriteReply from '../reply/WriteReply'
 import { Tag, Divider, Avatar } from 'antd';
 import {Link, useParams} from 'react-router-dom'
 import {MailFilled,

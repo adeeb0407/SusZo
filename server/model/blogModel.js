@@ -13,6 +13,10 @@ const blogModel = mongoose.Schema({
         type: String,
         required : true,
      },
+     userDetails : [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'user'
+    }],
     createdAt : {
         type : Date,
         default : new Date(),

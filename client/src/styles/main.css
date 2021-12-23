@@ -1,3 +1,12 @@
 .main{
     display: flex;
 }
+a {
+    color: black;
+}
+
+@media (max-width: 600px) {
+    .main{
+        display: block;
+    }
+}

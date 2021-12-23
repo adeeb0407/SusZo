@@ -2,6 +2,7 @@
     margin: 30px;
     box-sizing: border-box;
     height: 20%;
+    width: 60vw;
 }
 .box-replies{
     overflow: scroll;
@@ -34,4 +35,10 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #0050b3; 
+  }
+
+  @media (max-width: 600px) {
+    .replies{
+      width: 85vw;
+    }
   }

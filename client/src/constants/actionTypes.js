@@ -14,3 +14,10 @@ export const CAPTURE_ID = 'CAPTURE_ID';
 export const REPLY_SEND = 'REPLY_SEND';
 export const REPLY_DELETE = 'REPLY_DELETE';
 
+//BLOGS
+export const BLOG_PUBLISH = 'BLOG_PUBLISH';
+export const BLOG_DELETE = 'BLOG_DELETE';
+export const FETCH_BLOGS_BY_USER = 'FETCH_BLOGS_BY_USER';
+export const FETCH_ALL_BLOGS = 'FETCH_ALL_BLOGS';
+
+

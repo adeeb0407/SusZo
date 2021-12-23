@@ -1,9 +1,35 @@
 .blogWriter{
-    width: 87vw;
+    width: 83vw;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    height: 300px;
+}
+.blogPage{
+    margin: 10px;
+}
+.blogAligniment{
+    margin: 20px;
+}
+.myblogs{
+    background-color: #EEE9E9;
+    background-size:contain;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+   
+}
+.displayBlog{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+.blogPer{
+    margin: 10px;
 }
 
 @media (max-width: 600px) {
     .blogWriter{
-        width: 100vw;
+        width: 90vw;
     } 
 }

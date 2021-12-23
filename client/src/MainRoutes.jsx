@@ -17,6 +17,8 @@ import Editprofile from './components/editUserProfile/Editprofile';
 import VisitProfile from './components/profile/VisitProfile';
 import ProfileByURL from './components/profile/ProfileByURL';
 import WriteBlog from './components/blog/WriteBlog';
+import DisplayBlogs from './components/blog/DisplayBlogs';
+import MyBlogs from './components/blog/MyBlogs';
 
 function Main() {
     const dispatch = useDispatch()
@@ -31,10 +33,13 @@ function Main() {
             <Route exact path = '/login' element = {<Login />} />
             <Route exact path = '/register' element = {<Register />} />
             <Route exact path = '/user' element = {<Finduser />} />
-            <Route exact path = '/profile' element = {<Profile />} />
+            <Route exact path = '/profile' element = {<Profile />} >
+                <Route exact path = '/profile/mydiary' element = {<MyBlogs />} />
+            </Route>
             <Route exact path = '/edituserprofile' element = {<Editprofile />} />
             <Route exact path = '/visitprofile' element = {<VisitProfile />} />
             <Route exact path = '/user/:username' element = {<ProfileByURL />} />
+            <Route exact path = '/whatsnew' element = {<DisplayBlogs />} />
             <Route exact path = '/writeBlog' element = {<WriteBlog />} />
             </Routes>
             </div>
