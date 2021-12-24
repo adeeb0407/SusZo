@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Comment, Avatar, Form, Button, List, Input } from 'antd';
+import { Comment, Avatar, Form, Button, List, message } from 'antd';
 import moment from 'moment';
 import Editor from './Editor'
 import {postReply} from '../../actions/replies'
@@ -23,6 +23,10 @@ function WriteReply({id}) {
 
     const handleCommentSubmit = (e) => {
         e.preventDefault()
+        if(replyData.reply === ''){
+          message.error('Please Enter a Reply')
+          return;
+        }
         console.log(replyData)
         dispatch(postReply(replyData, id))
         dispatch(fetchUsersById(id));

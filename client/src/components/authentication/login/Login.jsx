@@ -10,8 +10,6 @@ import {login} from '../../../actions/userActions'
 const Login = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
 
-  const [loginSuccess, setloginSuccess] = useState(false)
-
   const history = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -37,8 +35,6 @@ const Login = () => {
   const onFinish = (values) => {
     console.log(loginDetails);
     dispatch(login(loginDetails, history));
-    message.success('User Loged in Successfully')
-      setloginSuccess(true)
   };
 
   return (

@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Replies from '../reply/Replies'
 import WriteReply from '../reply/WriteReply'
 import { Tag, Divider, Avatar } from 'antd';
-import {Link, useParams, useNavigate} from 'react-router-dom'
+import {Link, useParams, useNavigate, Routes, Route , Outlet} from 'react-router-dom'
 import {MailFilled,
         EditFilled,
         EyeOutlined,
@@ -130,13 +130,20 @@ switch (profileData?.avatar) {
 <div className="right-side">
   <div className="nav">
     <ul>
+    <Link to = {`/user/${username}`}>
       <li  className="user-post active">Replies</li>
-      <li  className="user-review">Blogs</li>
+      </Link>
+      {user !== null &&<Link to = {`/user/${username}/diary`}>
+      <li  className="user-review">Diary</li>
+      </Link>}
     </ul>
   </div>
   <div className="profile-body">
-<Replies replies = {profileData?.replies} verifyId = {profileData?._id}/>
-{user?.response.id !== profileData?._id &&<WriteReply id = {profileData?._id}/>}
+  <Routes>
+  <Route exact path = '/' element = {<Replies replies = {profileData?.replies} userLogedId = {user?.response.id} verifyId = {profileData?._id}/>} />
+  </Routes>
+<Outlet />
+  {/* {user?.response.id !== profileData?._id &&<WriteReply id = {profileData?._id}/>} */}
     <div className="profile-posts tab">
       <h1>Replies</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quia sunt itaque ut libero cupiditate ullam qui velit laborum placeat doloribus, non tempore nisi ratione error rem minima ducimus. Accusamus adipisci quasi at itaque repellat sed

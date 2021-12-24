@@ -31,8 +31,12 @@ const Register = () => {
   })
 
   const onFinish = (e) => {
+    const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if(regex.test(userData.email) === false){
+      message.error('Please put in a proper Email')
+    }else{
     dispatch(register(userData, history))
-    message.success('User Registered Successfully')
+  }
   };
 
   const handelChange = (e) => {

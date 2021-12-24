@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Menu from "@mui/material/Menu";
 import suszoLogo from "../images/suszo_logo.png";
 import {
-  searchByUsername,
+  getAllUserByPrefix,
   searchUser,
   fetchUsersById,
 } from "../actions/getUsers";
@@ -96,19 +96,21 @@ export default function Navbar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [search, setsearch] = useState('')
 
-  const searchUsername = useSelector((state) => state.searchByUsername);
+  const users = useSelector((state) => state.users);
   const usersData = useSelector((state) => state.usersData);
 
-  console.log(usersData);
+  console.log(users);
 
   const handelSearchInput = (e) => {
     const { name, value } = e.target;
-    dispatch(searchByUsername(value));
+    setsearch(value)
+     dispatch(getAllUserByPrefix(value));
   };
 
   const handelSearch = () => {
-    dispatch(searchUser(searchUsername, navigate));
+    dispatch(getAllUserByPrefix(search), navigate('/user'));
   };
 
   const handleProfileMenuOpen = (event) => {
@@ -135,6 +137,7 @@ export default function Navbar() {
     dispatch({ type: "LOGOUT" });
     navigate("/login");
     setUser(null);
+
   };
 
   const handleMobileMenuClose = () => {
@@ -279,17 +282,17 @@ export default function Navbar() {
             </SearchIconWrapper>
             <StyledInputBase
               name="username"
-              placeholder="Search User"
+              placeholder="Username / Intrests"
               inputProps={{ "aria-label": "search" }}
               onChange={handelSearchInput}
             />
           </Search>
           <Button
             type="primary"
-            icon={<FileSearchOutlined />}
+            icon={<SearchOutlined />}
             onClick={handelSearch}
+            style = {{padding : '5px'}}
           >
-            Search
           </Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>

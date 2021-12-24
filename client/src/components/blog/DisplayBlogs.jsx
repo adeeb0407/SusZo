@@ -12,6 +12,7 @@ import default_male from '../../images/default_male.jpg'
 import default_female from '../../images/default_female.jpg'
 import { useEffect, useState } from 'react'
 import {fetchAllBlogs} from '../../actions/blog'
+import {Tabs} from "antd";
 import { useSelector, useDispatch } from 'react-redux'
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -27,9 +28,9 @@ import { red } from '@mui/material/colors';
 import { 
     HeartFilled ,
     ShareAltOutlined,
-    DownCircleFilled 
+    DownCircleFilled,
+    FileWordOutlined
 
-    
 }from '@ant-design/icons';
 import dateFormat, { masks } from "dateformat";
 import Parser from 'html-react-parser';
@@ -49,7 +50,8 @@ const ExpandMore = styled((props) => {
 function DisplayBlogs() {
 
         const [expanded, setExpanded] = React.useState(false);
-      
+        const { TabPane } = Tabs;
+
         const handleExpandClick = () => {
           setExpanded(!expanded);
         };
@@ -70,6 +72,20 @@ function DisplayBlogs() {
         )
     }else{
     return (
+      <>
+        <Tabs defaultActiveKey="2">
+    <TabPane
+    style = {{marginBottom : '20px'}}
+      tab={
+        <span>
+          <FileWordOutlined />
+          Explore Diaries
+        </span>
+      }
+      key="1"
+    >
+    </TabPane>
+    </Tabs>
         <div className="displayBlog">
         {diaries?.map((blogItem, index)=> 
             <Card sx={{ maxWidth: 545 }} className='blogPer'>
@@ -125,9 +141,7 @@ function DisplayBlogs() {
         </Typography>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            This impressive paella is a perfect party dish and a fun meal to cook
-            together with your guests. Add 1 cup of frozen peas along with the mussels,
-            if you like.
+            {blogItem.snippet}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -156,6 +170,7 @@ function DisplayBlogs() {
       </Card>
         )}
       </div>
+      </>
     )}
 }
 

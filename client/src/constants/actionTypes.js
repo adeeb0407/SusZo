@@ -4,6 +4,7 @@ export const LOGOUT = 'LOGOUT';
 //GET USERS
 export const FETCH_USERS = 'FETCH_USERS';
 export const SEARCH_USER = 'SEARCH_USER';
+export const FETCH_USER_BY_PREFIX = 'FETCH_USER_BY_PREFIX';
 export const FETCH_USER_SERCHED = 'FETCH_USER_SERCHED';
 export const FETCH_USERS_BY_ID = 'FETCH_USERS_BY_ID';
 // UPDATE USER

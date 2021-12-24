@@ -5,6 +5,10 @@ const blogModel = mongoose.Schema({
         type : String,
         required : true,
     },
+    snippet : {
+        type : String,
+        required : true,
+    },
     blogBody : {
         type : String,
         required : true,

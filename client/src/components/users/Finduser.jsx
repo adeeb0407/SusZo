@@ -8,7 +8,7 @@ function Finduser() {
 
     useEffect(()=> {
         dispatch(fetchUsers());
-    }, [])
+    }, [dispatch])
     const getUserId = (id) => {
     dispatch(captureId(id))
     }

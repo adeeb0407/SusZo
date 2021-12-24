@@ -3,7 +3,7 @@ import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 
 function Editor({ onChange, onSubmit, submitting, value }) {
     const { TextArea } = Input;
-       return( <>
+       return( <Form>
           <Form.Item>
             <TextArea rows={4} onChange={onChange} value={value} />
           </Form.Item>
@@ -12,7 +12,7 @@ function Editor({ onChange, onSubmit, submitting, value }) {
               Add Comment
             </Button>
           </Form.Item>
-        </>
+        </Form>
       );
 }
 

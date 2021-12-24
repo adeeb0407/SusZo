@@ -1,6 +1,7 @@
 import React, { createElement, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Comment, Tooltip, Avatar, Divider, Popconfirm, message } from "antd";
+import WriteReply from './WriteReply'
 import { deleteReply } from "../../actions/replies";
 import {fetchUsersById} from '../../actions/getUsers'
 import moment from "moment";
@@ -14,7 +15,7 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 
-const Replies = ({ replies, userId, verifyId }) => {
+const Replies = ({ replies, userId, verifyId, userLogedId }) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
@@ -65,6 +66,7 @@ const Replies = ({ replies, userId, verifyId }) => {
     return <Empty />;
   } else {
     return (
+      <>
       <div className="replies box-replies">
         {replies?.map((data) =>
           data.map((repliesData) => 
@@ -127,6 +129,8 @@ const Replies = ({ replies, userId, verifyId }) => {
           }
         /> */}
       </div>
+              {userLogedId !== verifyId &&<WriteReply />}
+              </>
     );
   }
 };

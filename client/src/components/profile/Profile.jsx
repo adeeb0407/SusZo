@@ -61,7 +61,7 @@ function Profile() {
     <div className="profile-img">
     {(() => {
   
-  switch (profileData?.avatar) {
+  switch (profileData?.avatar || profileData.gender) {
      case 'male1':
       return(<img src={male1} width="200" alt="Profile Image" />)
      case 'male2':
@@ -85,6 +85,14 @@ function Profile() {
      case 'female4':
          return (
           <img src={female4} width="200" alt="Profile Image" />
+         )
+     case 'female':
+         return (
+          <img src={default_female} width="200" alt="Profile Image" />
+         )
+     case 'male':
+         return (
+          <img src={default_male} width="200" alt="Profile Image" />
          )
      default:
          return (
@@ -132,7 +140,7 @@ function Profile() {
         )}
         </div>
         <div className="profile-btn">
-         <button className="chatbtn" id="chatBtn"><Link to='/writeBlog'><BookOutlined /> Write a Diary</Link></button> 
+         <button className="chatbtn" id="chatBtn"><Link to='/writeBlog' style = {{color : 'white'}}><BookOutlined /> Write a Diary</Link></button> 
           <button className="chatbtn" id="chatBtn" onClick = {copyToClipboard}><ShareAltOutlined /> Share</button>
           <Link to ='/edituserprofile' ><button className="createbtn" id="Create-post"><EditFilled /> Edit</button></Link>
         </div>

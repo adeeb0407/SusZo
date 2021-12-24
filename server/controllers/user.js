@@ -57,7 +57,34 @@ export const createUser = async (req, res) => {
 };
 export const getUser = async (req, res) => {
   try {
-      const fetchData = await UserModel.find().sort({createdAt : -1})
+      const fetchData = await UserModel.find()
+      .select('fullname username intrests avatar headline createdAt')
+      .sort({createdAt : -1})
+      // .aggregate([
+      //   { $lookup:
+      //      {
+      //        from: 'reply',
+      //        localField: 'reply',
+      //        foreignField: '_id',
+      //        as: 'userReply'
+      //      }
+      //    }
+      //   ])
+       //.limit(how many data you want)
+      // const print = fetchData.map((dataItem) => dataItem._id);
+      // const print = fetchData.filter((dataItem) => dataItem.title === 'Adseeb');
+      res.status(200).json(fetchData)
+  } catch (error) {
+      res.status(404).json( {message : error.message} )
+  }
+}
+export const getAllUserByPrefix = async (req, res) => {
+  const {username} = req.body;
+  try {
+      const fetchData = await UserModel.find( { $or: [ {"intrests": { "$regex": username }}, {"username": { "$regex": username }} ] } )
+      // ({$or : {"intrests": { "$regex": username }}, {"username": { "$regex": username }}})
+      .select('fullname username intrests avatar headline createdAt')
+      .sort({createdAt : -1})
       // .aggregate([
       //   { $lookup:
       //      {

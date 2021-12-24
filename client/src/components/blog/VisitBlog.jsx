@@ -5,19 +5,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Card } from 'antd';
 import Parser from 'html-react-parser';
 
-function MyBlogs() {
+function VisitBlog() {
     const dispatch = useDispatch()
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-    const profileData = useSelector((state) => state.userById)
+    const id = useSelector((state) => state.id)
 
     const profileBlogs = useSelector(state => state.diary)
-    console.log(profileBlogs)
 
     useEffect(() => {
         if(user !== null){
-        dispatch(fetchBlogByUser(user.response.id))
+        dispatch(fetchBlogByUser(id))
         return;
-    }
+        }
     }, [])
 
     if(profileBlogs === ''){
@@ -41,4 +40,4 @@ function MyBlogs() {
     )}
 }
 
-export default MyBlogs
+export default VisitBlog
