@@ -1,0 +1,14 @@
+
+.lazyLoading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 90vw;
+    min-height: 100vh;
+}
+
+@media (max-width: 600px) {
+    .main{
+        display: block;
+    }
+}

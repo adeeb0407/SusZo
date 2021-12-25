@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans:wght@700&display=swap');
+.nav_remove_button{
+    transition: all 0.5s ease;
+    left: -300px;
+    position:absolute;
+    visibility: visible;
+    z-index: 100;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+.nav_show_button{
+    transition: all 0.5s ease-out;
+    left: 300px;
+    visibility: visible;
+    position: absolute;
+    z-index: 100;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+.navbar{
+    display: flex;
+    padding: 20px;
+    border: 1px solid #d9d9d9;
+}
+.main_content_side{
+    margin-left : '30%'
+}
+.navMain{
+    position: absolute;
+    left: -300px;
+    z-index: 100;
+}
+.navbar_styling{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    position: sticky;
+    top: 0;
+    background-color: #096dd9;
+    border-radius: 0px 0px 5px 5px;
+}
+.title{
+    padding-left: 20px;
+}
+.avatar-item{
+    padding: 10px;
+}
+.logoTitle{
+    font-family: 'Bebas Neue', cursive;
+}
+@media (max-width: 768px) {
+
+    /* .navShow{
+        display: none;
+        position: none;
+    }
+    .nav_show_button{
+        display: block;
+        margin: 10px;
+        position: fixed;
+        z-index: 100;
+    } */
+}
