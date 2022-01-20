@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {reduxActionTemplate} from './actions/userActions'
 import {useDispatch, useSelector} from 'react-redux'
 import 'antd/dist/antd.css';
@@ -24,10 +24,20 @@ import VisitBlog from './components/blog/VisitBlog';
 
 function Main() {
     const dispatch = useDispatch()
+    const [navShow, setNavShow] = useState(true);
+    const navRemove = () => {
+        const nav = document.querySelector(".navShow");
+        setNavShow(!navShow);
+        if (navShow) {
+          nav.classList.remove("nav_remove_button");
+        } else {
+          nav.classList.remove("nav_show_button");
+        }
+      };
     return (
         <>
-        <Navbar />
-        <div className = 'main'>
+        <Navbar navShow = {navShow} setNavShow = {setNavShow}/>
+        <div className = 'main' onClick={navRemove}>
         {/* <SideNavbar /> */}
         <div className='main_content_side'>
             <Routes>

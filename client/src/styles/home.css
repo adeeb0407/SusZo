@@ -1,4 +1,56 @@
-/* body {
-    background: rgb(28,22,140);
-    background: linear-gradient(135deg, rgba(28,22,140,1) 5%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-} */
+
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@500&display=swap');
+
+.home-main{
+background:linear-gradient(135deg, rgba(22,106,140,0.5) 13%, rgba(9,121,90,0.5) 50%, rgba(0,255,154,0.5) 100%), url(../images/background.jpg);
+background-repeat: no-repeat;
+background-size:cover;
+flex-direction: column;
+font-family: 'Saira', sans-serif;
+padding-bottom: 10%;
+display: flex;
+align-items: center;
+}
+
+.home-heading {
+    margin-top: 20px;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 3rem;
+    color: rgb(6, 52, 158);
+    padding-bottom: 10px;
+}
+.home-content{
+    line-height: 35px !important;
+    padding-top: 20px;
+    font-size: 2rem;
+    color: white;
+}
+.home-content-heading{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(41, 39, 39);
+}
+.home-info{
+    font-size: 1rem;
+    color: rgb(208, 245, 187);
+}
+.home-subheading{
+    text-align: center;
+}
+.register-buttton{
+    align-items: start;
+}
+
+@media (max-width : 1200px){
+    .home-heading{
+        font-size: 2.3rem;
+    } 
+    .home-subheading{
+        font-size: 1.5rem
+    }
+    .home-content{
+        line-height: 28px !important;
+        padding: 10px;
+    }
+}

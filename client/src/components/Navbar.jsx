@@ -81,7 +81,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar({navShow, setNavShow}) {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -120,7 +120,6 @@ export default function Navbar() {
     setAnchorEl(event.currentTarget);
   };
   const Navref = useRef("");
-  const [navShow, setNavShow] = useState(true);
   
   const navShowToggle = () => {
     const nav = document.querySelector(".navShow");

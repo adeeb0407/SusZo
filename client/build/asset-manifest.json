@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.73613532.chunk.css",
+    "main.js": "/static/js/main.9b449e37.chunk.js",
+    "main.js.map": "/static/js/main.9b449e37.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.776c1e0d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.776c1e0d.js.map",
+    "static/css/2.0772111c.chunk.css": "/static/css/2.0772111c.chunk.css",
+    "static/js/2.d520e0c7.chunk.js": "/static/js/2.d520e0c7.chunk.js",
+    "static/js/2.d520e0c7.chunk.js.map": "/static/js/2.d520e0c7.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.0772111c.chunk.css.map": "/static/css/2.0772111c.chunk.css.map",
+    "static/css/main.73613532.chunk.css.map": "/static/css/main.73613532.chunk.css.map",
+    "static/js/2.d520e0c7.chunk.js.LICENSE.txt": "/static/js/2.d520e0c7.chunk.js.LICENSE.txt",
+    "static/media/home.css": "/static/media/background.cab2befa.jpg",
+    "static/media/female1.09777a36.png": "/static/media/female1.09777a36.png",
+    "static/media/female2.2c2639fa.png": "/static/media/female2.2c2639fa.png",
+    "static/media/female3.bfe9ebb4.png": "/static/media/female3.bfe9ebb4.png",
+    "static/media/female4.1aaec8c0.png": "/static/media/female4.1aaec8c0.png",
+    "static/media/male1.d0b3bf30.png": "/static/media/male1.d0b3bf30.png",
+    "static/media/male2.a6873155.png": "/static/media/male2.a6873155.png",
+    "static/media/male3.4132c3e4.png": "/static/media/male3.4132c3e4.png",
+    "static/media/male4.d9477355.png": "/static/media/male4.d9477355.png",
+    "static/media/other.00fff1c5.png": "/static/media/other.00fff1c5.png",
+    "static/media/suszo_logo.48f71d18.png": "/static/media/suszo_logo.48f71d18.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.776c1e0d.js",
+    "static/css/2.0772111c.chunk.css",
+    "static/js/2.d520e0c7.chunk.js",
+    "static/css/main.73613532.chunk.css",
+    "static/js/main.9b449e37.chunk.js"
+  ]
+}

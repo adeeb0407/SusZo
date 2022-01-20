@@ -61,7 +61,7 @@ function Profilecard({users, getUserId}) {
 	<h3 className='text'>{userInfo.username}</h3>
 	<h3 className='text'>{userInfo.fullname}</h3>
 	{/* <h6 className='text'>{userInfo.email}</h6> */}
-	<p>{userInfo.headline}</p>
+	<p className='card-title'>{userInfo.headline}</p>
 	<div class="buttons">
 
         <Link to ='/visitprofile'>

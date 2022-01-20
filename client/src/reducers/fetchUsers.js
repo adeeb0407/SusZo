@@ -1,6 +1,6 @@
 import {FETCH_USERS_BY_ID, FETCH_USER_BY_PREFIX,FETCH_USERS, UPDATE, DELETE} from '../constants/actionTypes'
 
-export default (users = [], action) => {
+export default (users = null, action) => {
     switch (action.type) {
         
         case FETCH_USERS:

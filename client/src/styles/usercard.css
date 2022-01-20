@@ -14,7 +14,7 @@ h6 {
 	text-transform: uppercase;
 }
 
-p {
+.card-title {
 	font-size: 14px;
 	line-height: 21px;
 }

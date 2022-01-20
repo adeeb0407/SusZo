@@ -18,6 +18,8 @@ function Finduser() {
     console.log(users)
     if(!users){
         return (<Spin size="large" className = 'lazyLoading'/>)
+    }else if(users === null){
+        return (<Spin size="large" className = 'lazyLoading'/>)
     }else{
     return (
         <div>
