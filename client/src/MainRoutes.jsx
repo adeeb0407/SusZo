@@ -21,6 +21,8 @@ import DisplayBlogs from './components/blog/DisplayBlogs';
 import MyBlogs from './components/blog/MyBlogs';
 import SearchedUserBlog from './components/blog/SearchedUserBlog';
 import VisitBlog from './components/blog/VisitBlog';
+import InboxMain from './components/inbox/InboxMain';
+import Settings from './components/settings/Settings';
 
 function Main() {
     const dispatch = useDispatch()
@@ -47,6 +49,8 @@ function Main() {
             <Route exact path = '/user' element = {<Finduser />} />
             <Route exact path = '/profile' element = {<Profile />} >
                 <Route exact path = '/profile/mydiary' element = {<MyBlogs />} />
+                <Route exact path = '/profile/inbox' element = {<InboxMain />} />
+                <Route exact path = '/profile/settings' element = {<Settings />} />
             </Route>
             <Route exact path = '/edituserprofile' element = {<Editprofile />} />
             <Route exact path = '/visitprofile' element = {<VisitProfile />} >
@@ -57,6 +61,8 @@ function Main() {
             </Route>
             <Route exact path = '/whatsnew' element = {<DisplayBlogs />} />
             <Route exact path = '/writeBlog' element = {<WriteBlog />} />
+            <Route exact path = '/inbox' element = {<InboxMain />} />
+            <Route exact path = '/settings' element = {<Settings />} />
             </Routes>
             </div>
         </div>

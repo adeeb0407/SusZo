@@ -46,6 +46,9 @@
 .logoTitle{
     font-family: 'Bebas Neue', cursive;
 }
+.logoTitle:hover{
+    color : white,
+}
 @media (max-width: 768px) {
 
     /* .navShow{

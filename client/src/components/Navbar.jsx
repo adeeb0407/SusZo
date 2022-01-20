@@ -1,6 +1,11 @@
 import * as React from "react";
 import { useState, useRef, useEffect } from "react";
-import { Button, Form } from "antd";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { Button, Form, message } from "antd";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -136,12 +141,27 @@ export default function Navbar({navShow, setNavShow}) {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
+  const [open, setOpen] = React.useState(false);
+
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/login");
     setUser(null);
 
   };
+  const handleLogout = () => {
+    logout()
+    message.success('User Sucessfully Logged Out');
+    setOpen(false);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+ const handleClose = () => {
+   setOpen(false);
+ };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -183,7 +203,7 @@ export default function Navbar({navShow, setNavShow}) {
         </Link>
       )}
       {user !== null && (
-        <MenuItem onClick={handleMenuClose} onClick={logout}>
+        <MenuItem onClick={handleMenuClose, handleClickOpen} >
           Logout
         </MenuItem>
       )}
@@ -208,6 +228,7 @@ export default function Navbar({navShow, setNavShow}) {
       onClose={handleMobileMenuClose}
     >
       {user !== null && (
+        <Link to ='/inbox'>
         <MenuItem>
           <IconButton
             size="large"
@@ -220,6 +241,7 @@ export default function Navbar({navShow, setNavShow}) {
           </IconButton>
           <p>Messages</p>
         </MenuItem>
+        </Link>
       )}
       {user !== null && (
         <MenuItem>
@@ -266,11 +288,13 @@ export default function Navbar({navShow, setNavShow}) {
           >
             <MenuOutlined />
           </IconButton>
+          <Link to ='/'>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
+            style = {{color : 'white'}}
           >
             <img
               src={suszoLogo}
@@ -280,6 +304,7 @@ export default function Navbar({navShow, setNavShow}) {
             />
             <span className="logoTitle">SusZo</span>
           </Typography>
+          </Link>
           <Search>
             <SearchIconWrapper>
               <SearchOutlined />
@@ -301,15 +326,17 @@ export default function Navbar({navShow, setNavShow}) {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {user !== null && (
+              <Link to ='/inbox'>
               <IconButton
                 size="large"
                 aria-label="show 4 new mails"
                 color="inherit"
               >
                 <Badge badgeContent={4} color="error">
-                  <MailOutlined />
+                  <MailOutlined style = {{color : 'white'}}/>
                 </Badge>
               </IconButton>
+              </Link>
             )}
             {user !== null && (
               <IconButton
@@ -393,6 +420,22 @@ export default function Navbar({navShow, setNavShow}) {
       {renderMenu}
     </Box>
    <SideNavbar navShowToggle = {navShowToggle}/>
+   <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you Sure you want ot Logout?"}
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose} style={{ color: "green", borderColor : 'green'}}>No, ll'l stay</Button>
+          <Button onClick={handleLogout} autoFocus style={{ color: "red", borderColor : 'red'}}>
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

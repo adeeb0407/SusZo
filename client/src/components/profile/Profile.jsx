@@ -19,6 +19,7 @@ import { Tag, Divider, Spin,Avatar, message } from 'antd';
 import {Link, Routes, Route, Outlet } from 'react-router-dom'
 import MyBlogs from '../blog/MyBlogs'
 import Replies from '../reply/Replies'
+import AvatarPic from '../misc/AvatarPic';
 import {deleteReply} from '../../actions/replies'
 import {MailFilled,
         EditFilled,
@@ -70,48 +71,7 @@ function Profile() {
             <div className="container">
   <div className="profile-header">
     <div className="profile-img">
-    {(() => {
-  
-  switch (profileData?.avatar || profileData.gender) {
-     case 'male1':
-      return(<img src={male1} width="200" alt="Profile Image" />)
-     case 'male2':
-      return(<img src={male2} width="200" alt="Profile Image" />)
-     case 'male3':
-      return(<img src={male3} width="200" alt="Profile Image" />)
-     case 'male4':
-      return(<img src={male4} width="200" alt="Profile Image" />)
-     case 'female1':
-         return (
-          <img src={female1} width="200" alt="Profile Image" />
-         )
-     case 'female2':
-         return (
-          <img src={female2} width="200" alt="Profile Image" />
-         )
-     case 'female3':
-         return (
-          <img src={female3} width="200" alt="Profile Image" />
-         )
-     case 'female4':
-         return (
-          <img src={female4} width="200" alt="Profile Image" />
-         )
-     case 'female':
-         return (
-          <img src={default_female} width="200" alt="Profile Image" />
-         )
-     case 'male':
-         return (
-          <img src={default_male} width="200" alt="Profile Image" />
-         )
-     default:
-         return (
-          <img src ={Profile.gender === 'male' ? default_male : Profile.gender === 'female' ? default_female : default_male}  width="200px" />
-         )
-  }
-
-})()}
+    <AvatarPic profileData = {profileData}/>
     </div>
     <div className="profile-nav-info">
       <h3 className="user-name">{profileData.username}</h3>
@@ -163,13 +123,13 @@ function Profile() {
         <Link to = '/profile'>
           <li  className="user-post userStatus" onClick = {handelActiveClass}>Replies</li>
           </Link>
-          <Link to = '/profile'>
+          <Link to = '/profile/inbox'>
           <li  className="user-review userStatus" onClick = {handelActiveClass}>Inbox</li>
           </Link>
           <Link to = '/profile/mydiary'>
           <li  className="user-setting userStatus" onClick = {handelActiveClass}>Diary</li>
           </Link>
-          <Link to = '/profile/mydiary'>
+          <Link to = '/profile/settings'>
           <li  className="user-setting userStatus" onClick = {handelActiveClass}> Settings</li>
           </Link>
         </ul>

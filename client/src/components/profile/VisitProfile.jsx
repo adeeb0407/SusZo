@@ -17,6 +17,7 @@ import { FaTransgenderAlt, FaUserAlt } from 'react-icons/fa';
 import {fetchUsersById, captureId} from '../../actions/getUsers'
 import { useDispatch, useSelector } from 'react-redux';
 import Replies from '../reply/Replies'
+import AvatarPic from '../misc/AvatarPic'
 import WriteReply from '../reply/WriteReply'
 import { Tag, Divider, Avatar, Spin } from 'antd';
 import {Link, useParams, Outlet, Routes, Route} from 'react-router-dom'
@@ -52,40 +53,7 @@ if(!profileData){
         <div className="container">
 <div className="profile-header">
 <div className="profile-img">
-{(() => {
-
-switch (profileData?.avatar) {
- case 'male1':
-  return(<img src={male1} width="200" alt="Profile Image" />)
- case 'male2':
-  return(<img src={male2} width="200" alt="Profile Image" />)
- case 'male3':
-  return(<img src={male3} width="200" alt="Profile Image" />)
- case 'male4':
-  return(<img src={male4} width="200" alt="Profile Image" />)
- case 'female1':
-     return (
-      <img src={female1} width="200" alt="Profile Image" />
-     )
- case 'female2':
-     return (
-      <img src={female2} width="200" alt="Profile Image" />
-     )
- case 'female3':
-     return (
-      <img src={female3} width="200" alt="Profile Image" />
-     )
- case 'female4':
-     return (
-      <img src={female4} width="200" alt="Profile Image" />
-     )
- default:
-     return (
-      <img src ={profileData?.gender === 'male' ? default_male : profileData?.gender === 'female' ? default_female : default_male}  width="200px" />
-     )
-}
-
-})()}
+<AvatarPic profileData = {profileData} />
 </div>
 <div className="profile-nav-info">
   <h3 className="user-name">{profileData.username}</h3>

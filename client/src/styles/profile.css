@@ -275,6 +275,10 @@ button.createbtn i {
     width: 200px;
     left: 0px;
   }
+  
+  .profile-body {
+    width: 98vw;
+  }
 
   .profile-nav-info {
     text-align: center;

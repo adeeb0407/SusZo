@@ -1,11 +1,30 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
 import {fetchBlogByUser} from '../../actions/blog'
 import { useSelector, useDispatch } from 'react-redux'
 import { Card } from 'antd';
 import Parser from 'html-react-parser';
+import * as React from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import {Spin, Tabs} from 'antd';
+import Typography from '@mui/material/Typography';
+import moment from 'moment'
+import {    
+    DownOutlined,
+    UpOutlined,
+    BookOutlined
+    }
+ from '@ant-design/icons'
 
 function MyBlogs() {
+    const [expanded, setExpanded] = React.useState(false);
+
+    const { TabPane } = Tabs;
+
+    const handleChange = (panel) => (event, isExpanded) => {
+      setExpanded(isExpanded ? panel : false);
+    };
     const dispatch = useDispatch()
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
     const profileData = useSelector((state) => state.userById)
@@ -21,24 +40,62 @@ function MyBlogs() {
     }, [])
 
     if(profileBlogs === ''){
-        return(<h4>Only Registred users can view diaries</h4>)
+        return (<Spin size="large" className = 'lazyLoading'/>)
     }else if (!user) {
-        return (<h1>Loading</h1>)
+        return (<Spin size="large" className = 'lazyLoading'/>)
+    }else if (!profileBlogs) {
+        return (<Spin size="large" className = 'lazyLoading'/>)
     }else{
     return (
+      <>
+                      <Tabs defaultActiveKey="2">
+    <TabPane
+    style = {{marginBottom : '20px'}}
+      tab={
+        <span>
+         <BookOutlined />
+          My Diaries
+        </span>
+      }
+      key="1"
+    >
+    </TabPane>
+    </Tabs>
         <div className="myblogs">
-            {profileBlogs?.map((diary)=> 
-                <div className="site-card-border-less-wrapper blogAligniment">
-    <Card title={diary.title} bordered={false} style={{ width: 300 }}>
-    <div>
-    {Parser(diary.blogBody)}
-        {/* {diary.blogBody} */}
+                <div>
+                    {profileBlogs?.map((diary, index)=>
+      <Accordion
+        expanded={expanded === `panel${index+1}`}
+        onChange={handleChange(`panel${index+1}`)}
+      >
+        <AccordionSummary
+          expandIcon={<DownOutlined />}
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
+        >
+          <Typography sx={{ width: "33%", flexShrink: 0 }}>
+          {diary.title}
+          </Typography>
+          <Typography sx={{ color: "text.secondary" }}>
+          {moment(diary.createdAt).format('MMMM Do YYYY')}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+          {Parser(diary.blogBody)}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+                    ).reverse()}
     </div>
-    </Card>
-  </div>
-            ).reverse()}
         </div>
-    )}
+        </>
+        
+    
+    )
+                    }
 }
+
+
 
 export default MyBlogs
